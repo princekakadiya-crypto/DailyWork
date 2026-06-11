@@ -1,8 +1,8 @@
-package com.tss.Entity;
+package com.tss.Bank.Account.Entity;
 
 import java.util.Random;
 
-public class Account {
+public abstract class Account implements Transaction {
     private static int count=1;
     private int id=0;
     private String accountNumber;
@@ -57,28 +57,21 @@ public class Account {
         return balance;
     }
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-    public void deposit(double amount)
-    {
-        balance+=amount;
-        System.out.println(amount+" Amount Deposit");
-    }
-    public void withdraw(double amount)
-    {
-        if((balance-amount)<=500)
-            System.out.println("Minimum 500 Balance Required.");
-        else
-        {
-            balance-=amount;
-            System.out.println(amount+" Amount Withdraw.");
-        }
-    }
     public int getID()
     {
         return id;
     }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public void deposit(double amount)
+    {
+        balance+=amount;
+    }
+
+    public abstract boolean withdraw(double amount);
 
     public void printDetail()
     {

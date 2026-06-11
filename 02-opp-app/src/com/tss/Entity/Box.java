@@ -16,6 +16,17 @@ public class Box {
         this.height=height;
         this.width=width;
         this.depth=depth;
+        System.out.println("con of box");
+
+    }
+
+    public void show()
+    {
+        System.out.println("Inside Box");
+    }
+    static
+    {
+        System.out.println("static block of box");
     }
 
     public void initializeBox()
