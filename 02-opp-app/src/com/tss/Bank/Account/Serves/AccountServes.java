@@ -3,6 +3,7 @@ package com.tss.Bank.Account.Serves;
 import com.tss.Bank.Account.Entity.Account;
 import com.tss.Bank.Account.Entity.CurrentAccount;
 import com.tss.Bank.Account.Entity.SavingAccount;
+import com.tss.Bank.Exception.MinimumBalanceException;
 import com.tss.Bank.Payment.Entity.Payment;
 import com.tss.Bank.Payment.Serves.PaymentServes;
 import com.tss.Validation.InputValidation;
@@ -41,8 +42,14 @@ public class AccountServes {
                             System.out.println("Invalid Account Number. "+(3-attempt)+" attempt left");
                         } else {
                             int amount = InputValidation.readInt("Enter Amount : ", 1);
-                            accounts.get(indexOfAccount).withdraw(amount);
-                            System.out.println(amount+" Amount Withdraw.");
+                            try {
+                                accounts.get(indexOfAccount).withdraw(amount);
+                                System.out.println(amount+" Amount Withdraw.");
+                            }
+                            catch (MinimumBalanceException e)
+                            {
+                                System.out.println(e.getMessage());
+                            }
                             break;
                         }
                     } while (true);
@@ -128,7 +135,14 @@ public class AccountServes {
                     PaymentServes paymentServes=new PaymentServes();
                     payments.add(paymentServes.Pay());
                     int paymentIndex=payments.size()-1;
-                    boolean flag=accounts.get(indexOfAccountFrom).withdraw(payments.get(paymentIndex).getAmount());
+                    boolean flag=false;
+                    try {
+                        flag=accounts.get(indexOfAccountFrom).withdraw(payments.get(paymentIndex).getAmount());
+                    }
+                    catch (MinimumBalanceException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
                     if (!flag) {
                         System.out.println("Transfer Failed.");
                         payments.get(paymentIndex).setStatus("failed");

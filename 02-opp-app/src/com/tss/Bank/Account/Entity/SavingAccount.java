@@ -1,5 +1,7 @@
 package com.tss.Bank.Account.Entity;
 
+import com.tss.Bank.Exception.MinimumBalanceException;
+
 public class SavingAccount extends Account {
     private double minimumBalance;
 
@@ -19,8 +21,7 @@ public class SavingAccount extends Account {
     {
         if((getBalance()-amount)<minimumBalance)
         {
-            System.out.println("Minimum "+minimumBalance+" Balance Required.");
-            return false;
+            throw new MinimumBalanceException(amount,minimumBalance);
         }
         else
         {
