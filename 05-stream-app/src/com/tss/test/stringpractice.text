@@ -1,0 +1,85 @@
+Level 4 – Grouping and Collectors
+
+### Task 16
+
+Count how many times each student name appears in the list.
+
+### Task 17
+
+Find all duplicate student names.
+
+### Task 18
+
+Group students by the first letter of their first name.
+
+### Task 19
+
+Create a map where:
+
+* Key = First Name
+
+* Value = Last Name
+
+### Task 20
+
+Partition students into two groups:
+
+* Names having more than 10 characters
+
+* Names having 10 or fewer characters
+
+---
+
+
+
+# Level 5 – Advanced Challenges
+
+### Task 21
+
+Create a comma-separated string of all unique student names sorted alphabetically.
+
+### Task 22
+
+Find the student name containing the highest number of vowels.
+
+### Task 23
+
+Find the second longest unique student name.
+
+### Task 24
+
+Find the frequency of each character used across all student names (excluding spaces).
+
+### Task 25
+
+Using Stream API and reduce(), calculate the total number of characters present in all names.
+
+---
+
+# Bonus Challenges
+
+### Bonus 1
+
+Create a Map<Integer, List<String>> where the key is the length of the student name and the value is the list of names having that length.
+
+### Bonus 2
+
+Find all names whose first and last names start with the same letter.
+
+### Bonus 3
+
+Identify the most frequently occurring student name.
+
+### Bonus 4
+
+Create a custom comparator and sort students based on:
+
+1. Length of name
+
+2. Alphabetical order if lengths are equal
+
+### Bonus 5
+
+Without using loops, print all unique first names in sorted order.
+
+---
