@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="com.tss.core.entity.Harddisk" name="harddisk" id="harddisk">
+<!--        setter injection-->
+<!--        <property name="capacity" value="360" />-->
+
+<!--        constructor injection-->
+        <constructor-arg value="360"/>
+    </bean>
+
+    <bean class="com.tss.core.entity.Computer" name="computer" id="computer">
+<!--        <property name="companyName" value="HP"/>-->
+<!--        <property name="harddisk" ref="harddisk"/>-->
+
+        <constructor-arg name="companyName" value="HP"/>
+        <constructor-arg name="harddisk" ref="harddisk"/>
+    </bean>
+
+</beans>
