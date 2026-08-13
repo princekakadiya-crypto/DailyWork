@@ -15,6 +15,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService{
 
     private final EmployeeRepository employeeRepository;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public List<EmployeeResponseDto> getAllEmployee() {
@@ -39,10 +40,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public EmployeeResponseDto addEmployee(EmployeeRequestDto dto) {
-        Employee employee=employeeRequestDtoToEmployee(dto);
+
+
+        String imageUrl = cloudinaryService.uploadImage(dto.getImage());
+
+        Employee employee=new Employee();
+        employee.setName(dto.getName());
+        employee.setDepartment(dto.getDepartment());
+        employee.setImageUrl(imageUrl);
+
         Employee result = employeeRepository.save(employee);
+
         return employeeToEmployeeResponseDto(result);
     }
+
+
 
     private Employee employeeRequestDtoToEmployee(EmployeeRequestDto dto){
         Employee employee=new Employee();
@@ -55,6 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         EmployeeResponseDto employeeResponseDto=new EmployeeResponseDto();
         employeeResponseDto.setId(employee.getId());
         employeeResponseDto.setName(employee.getName());
+        employeeResponseDto.setImageUrl(employee.getImageUrl());
         return employeeResponseDto;
     }
 

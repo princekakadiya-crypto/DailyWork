@@ -1,11 +1,15 @@
 package com.tss.__jpa_app.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeResponseDto {
     private Long id;
     private String name;
+    private String imageUrl;
 }
