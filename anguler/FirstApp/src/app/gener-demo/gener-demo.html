@@ -1,0 +1,32 @@
+
+<h3>Variables in Angular</h3>
+<p><button class="btn btn-primary">Bootstrap Test Button</button></p>
+<p>Data Binding using string Interpolation</p>
+<p>Genre Id: {{ GenreId }}</p>
+<p>Genre Code : {{ GenreCode }}</p>
+<p>Genre Desc: {{ GenreDesc }}</p>
+<p>Mathematical Expression 10+2*3 : {{ 10 + 2 * 3 }}</p>
+<p>Output of a Method getString() : {{ getString() }}</p>
+<p>Ternary Operator use : {{ num % 2 == 0 ? GenreDesc : num * 2 }}</p>
+
+<p>Genre Desc : <span [innerText]="GenreDesc"></span></p>
+<p>Output of a Method : <span [innerText]="getString()"></span></p>
+<p>Mathematical Expression : <span [innerText]="10 + 2 * 3"></span></p>
+
+Enter Genre Code: <input [value]="GenreDesc" (change)="updateGener($event)"/>
+<p>Value entered is : {{ GenreDesc }}</p>
+
+<button  class="btn btn-primary" (click)="updateNum()">num * 3</button>
+<p>Value of num is : {{ num }}</p>
+
+<h2>Two way  Binding - Template -> Component & Component -> Template</h2>
+
+Enter Genre Code: <input name="GenreDesc" [(ngModel)]="GenreDesc"/>
+<p>Value entered is : {{ GenreDesc }}</p>
+
+<select [(ngModel)]="selectedState">
+  <option value="GJ">Gujarat</option>
+  <option value="MH">Maharashtra</option>
+  <option value="RJ">Rajasthan</option>
+</select>
+<p>Selected State: {{ selectedState }}</p>

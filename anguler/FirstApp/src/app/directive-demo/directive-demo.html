@@ -1,0 +1,62 @@
+<h3>Structural Directives</h3>
+
+<p>
+	<button class="btn btn-sm btn-outline-primary" (click)="toggleDisplay()">
+		Toggle Display (currently: {{ toDisplay }})
+	</button>
+</p>
+
+<div *ngIf="toDisplay; else elseBlock">
+	<p>Displayed if toDisplay is true</p>
+
+<hr />
+<h4>Raw code snippet (displayed as-is):</h4>
+<pre><code>@for(num of lstNum; track $index; let idx=$index; let o = $odd)
+{
+	<p>{{(idx+1)}} {{(num)}} - {{(o)}}</p>
+}
+@empty
+{
+	<p>No elements in the list</p>
+}
+</code></pre>
+</div>
+
+<ng-template #elseBlock>
+	<p>Displayed if toDisplay is false</p>
+</ng-template>
+
+<hr />
+
+<p *ngIf="num < 100; else ge100"> 
+	<strong>num value in component is less than 100</strong>
+</p>
+<ng-template #ge100>
+	<p><strong>num value in component is 100 or greater</strong></p>
+</ng-template>
+
+<h4>List values:</h4>
+<ul>
+	<li *ngFor="let item of lstNum; let idx = index; let even = even">
+		{{ idx }} - {{ item }} (even: {{ even }})
+	</li>
+</ul>
+
+<hr />
+
+<h3>Movie Display Design</h3>
+<div>
+	<div *ngFor="let movie of movies">
+		<h4 [ngStyle]="{'color' : 'brown', 'font-size': 'larger'}">{{ movie.movieTitle | uppercase }}</h4>
+		<p [ngStyle]="{'font-weight' : checkOddEven(movie.movieId)}"><strong>Movie Id:</strong> {{ movie.movieId }}</p>
+		<p [ngStyle]="{'color' : movie.movieRating >= 4? 'green': 'red'}"><strong>Rating:</strong> {{ movie.movieRating | moveTypePipe : movie.genreId }}</p>
+		<p><strong>Release Date:</strong> {{ movie.releaseDate | date:'fullDate' }}</p>
+		<p><strong>Genre:</strong> {{ getGenreCode(movie.genreId) }}</p>
+	</div>
+</div>
+
+<div appHighlightDirective>example of custom directive</div>
+
+
+
+

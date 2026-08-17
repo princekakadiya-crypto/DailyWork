@@ -1,0 +1,10 @@
+<h3>Home Component</h3>
+
+<button class="btn" (click)="switchRole('Admin')">Admin</button>
+<button class="btn" (click)="switchRole('Member')">Member</button>
+
+@if (isAdmin) {
+  <app-admin></app-admin>
+} @else {
+  <app-member></app-member>
+}
