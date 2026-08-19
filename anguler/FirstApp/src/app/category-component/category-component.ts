@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../service/api-service';
 import { Category } from '../model/Category';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category-component',
@@ -11,20 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(private service: ApiService,private cdr: ChangeDetectorRef) {  }
+  categories!: Category[];
+  categories$!: Observable<Category[]>;
 
-  categories: Category[] = [];
+  service=inject(ApiService);
 
   ngOnInit(): void {
-    this.service.getCategory().subscribe({
-      next: (data: Category[]) => {
-        console.log('Categories loaded:', data);
-        this.categories = data;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error('Failed to load categories:', error);
-      }
-    });
+    this.categories$ = this.service.getCategory();
   }
 }

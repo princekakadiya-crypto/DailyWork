@@ -1,6 +1,8 @@
 <p>category-component works!</p>
 
 
+@if(categories$ | async; as categories)
+{
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
@@ -17,3 +19,8 @@
         </tr>
     </tbody>
 </table>
+}
+@else
+{
+    <p>Loading categories...</p>
+}
