@@ -45,18 +45,37 @@
 <hr />
 
 <h3>Movie Display Design</h3>
-<div>
-	<div *ngFor="let movie of movies">
-		<h4 [ngStyle]="{'color' : 'brown', 'font-size': 'larger'}">{{ movie.movieTitle | uppercase }}</h4>
-		<p [ngStyle]="{'font-weight' : checkOddEven(movie.movieId)}"><strong>Movie Id:</strong> {{ movie.movieId }}</p>
-		<p [ngStyle]="{'color' : movie.movieRating >= 4? 'green': 'red'}"><strong>Rating:</strong> {{ movie.movieRating | moveTypePipe : movie.genreId }}</p>
-		<p><strong>Release Date:</strong> {{ movie.releaseDate | date:'fullDate' }}</p>
-		<p><strong>Genre:</strong> {{ getGenreCode(movie.genreId) }}</p>
-	</div>
-</div>
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Movie Title</th>
+			<th>Movie ID</th>
+			<th>Rating</th>
+			<th>Release Date</th>
+			<th>Genre</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let movie of movies">
+			<td [ngStyle]="{'color' : 'brown', 'font-size': 'larger', 'font-weight': 'bold'}">{{ movie.movieTitle | uppercase }}</td>
+			<td [ngStyle]="{'font-weight' : checkOddEven(movie.movieId)}">{{ movie.movieId }}</td>
+			<td [ngStyle]="{'color' : movie.movieRating >= 4? 'green': 'red'}">{{ movie.movieRating | moveTypePipe : movie.genreId }}</td>
+			<td>{{ movie.releaseDate | date:'fullDate' }}</td>
+			<td>{{ getGenreCode(movie.genreId) }}</td>
+			<td><button class="btn btn-sm btn-outline-primary" (click)="viewMovieDetails(movie.movieId)">View Details</button></td>
+		</tr>
+	</tbody>
+</table>
 
 <div appHighlightDirective>example of custom directive</div>
 
+<div>Data from child: {{ dataFromChild }}</div>
 
+<hr />
 
-
+<app-movie-detail
+  [dataFromparent]="HiMessage"
+  [movieFromParent]="selectedMovie"
+  (dataToParent)="getDataFromChild($event)">
+</app-movie-detail>
