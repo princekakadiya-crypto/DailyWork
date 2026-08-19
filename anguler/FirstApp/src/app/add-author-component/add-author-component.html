@@ -5,13 +5,38 @@
             <form>
                 <div class="form-group">
                     <label for="name">Author Name:</label>
-                    <input type="text" class="form-control" id="name" [(ngModel)]="Author.name" name="name">
+                    <input minlength="2" maxlength="100" required type="text" class="form-control" id="name" [(ngModel)]="Author.name" name="name" #nameInput="ngModel">
+                    @if(nameInput.invalid && (nameInput.dirty || nameInput.touched))
+                    {
+                        <div class="alert alert-danger">
+                            <div *ngIf="nameInput.errors?.['required']">
+                                Name is required.
+                            </div>
+                            <div *ngIf="nameInput.errors?.['minlength']">
+                                Name must be at least 2 characters long.
+                            </div>
+                            <div *ngIf="nameInput.errors?.['maxlength']">
+                                Name cannot exceed 100 characters.
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="country">Author Country:</label>
-                    <input type="text" class="form-control" id="country" [(ngModel)]="Author.country" name="country">
+                    <input maxlength="100" required type="text" class="form-control" id="country" [(ngModel)]="Author.country" name="country" #countryInput="ngModel">
+                    @if(countryInput.invalid && (countryInput.dirty || countryInput.touched))
+                    {
+                        <div class="alert alert-danger">
+                            <div *ngIf="countryInput.errors?.['required']">
+                                Country is required.
+                            </div>
+                            <div *ngIf="countryInput.errors?.['maxlength']">
+                                Country cannot exceed 100 characters.
+                            </div>
+                        </div>
+                    }
                 </div>
-                <button type="button" class="btn btn-primary mt-2" (click)="addAuthor()">Add Author</button>
+                <button type="button"  class="btn btn-primary mt-2" (click)="addAuthor()">Add Author</button>
             </form>
     </div>
 </div>
