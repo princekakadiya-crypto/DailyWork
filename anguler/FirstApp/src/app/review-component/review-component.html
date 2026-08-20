@@ -1,0 +1,105 @@
+<div class="container mt-4">
+
+  <h2>Add Review</h2>
+
+  <form
+    [formGroup]="reviewForm"
+    (ngSubmit)="addReview()">
+
+    <!-- Book -->
+
+    <div class="mb-3">
+
+      <label for="bookId" class="form-label">Book</label>
+
+      <select id="bookId" class="form-select" formControlName="bookId">
+        
+        <option [ngValue]="null">-- Select Book --</option>
+
+        @for (book of (books$ | async); track book.bookId) {
+          <option [ngValue]="book.bookId">{{ book.title }}</option>
+        }
+      </select>
+
+      @if (bookId.invalid && (bookId.touched || bookId.dirty)) {
+        @if (bookId.hasError('required')) {
+          <span class="text-danger">Book is required</span>
+        }
+      }
+
+    </div>
+
+
+    <!-- Rating -->
+
+    <div class="mb-3">
+
+      <label for="rating" class="form-label">Rating </label>
+
+      <select id="rating" class="form-select" formControlName="rating">
+
+        <option [ngValue]="null">-- Select Rating --</option>
+        <option [ngValue]="1">1 Star</option>
+        <option [ngValue]="2">2 Stars</option>
+        <option [ngValue]="3">3 Stars</option>
+        <option [ngValue]="4">4 Stars</option>
+        <option [ngValue]="5">5 Stars</option>
+      </select>
+
+      @if (rating.invalid && (rating.touched || rating.dirty)) {
+
+        @if (rating.hasError('required')) {
+
+          <span class="text-danger">Rating is required</span>
+        }
+
+        @if (rating.hasError('min') || rating.hasError('max')) {
+
+          <span class="text-danger">Rating must be between 1 and 5</span>
+        }
+
+      }
+
+    </div>
+
+    <!-- Comment -->
+
+    <div class="mb-3">
+
+      <label for="comment" class="form-label">Comment</label>
+
+      <textarea
+        id="comment"
+        class="form-control"
+        rows="5"
+        placeholder="Write your review..."
+        formControlName="comment">
+      </textarea>
+
+      @if (comment.invalid && (comment.touched || comment.dirty)) {
+
+        @if (comment.hasError('required')) {
+
+          <span class="text-danger">Comment is required</span>
+        }
+
+        @if (comment.hasError('minlength')) {
+
+          <span class="text-danger">Comment should be at least 3 characters</span>
+        }
+
+        @if (comment.hasError('maxlength')) {
+
+          <span class="text-danger">Comment should not exceed 500 characters</span>
+        }
+      }
+
+    </div>
+
+    <!-- Submit -->
+
+    <button [disabled]="reviewForm.invalid" type="submit" class="btn btn-primary">Add Review</button>
+
+  </form>
+
+</div>
