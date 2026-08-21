@@ -44,12 +44,12 @@ export class EditAuthorComponent implements OnInit {
     this.service.updateAuthor(id, this.editAuthorForm.value).subscribe({
       next: (author) => {
         console.log('Author updated:', author);
+        this.router.navigate(['/author']);
       },
       error: (error) => {
         console.error('Error updating author:', error);
       }
     });
-    this.router.navigate(['/author']);
   }
 
   get name() {
