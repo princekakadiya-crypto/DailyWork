@@ -1,0 +1,22 @@
+<h2>Login</h2>
+<form [formGroup]="login" (ngSubmit)="submitLogin()">
+  <div>
+    <label for="userName">Username:</label>
+    <input type="text" id="userName" formControlName="userName">
+    @if(userName?.invalid && (userName?.dirty || userName?.touched)) {
+      <div class="alert alert-danger">
+          <div>Username is required.</div>
+      </div>
+    }
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+    @if(password?.invalid && (password?.dirty || password?.touched)) {
+      <div class="alert alert-danger">
+          <div>Password is required.</div>
+      </div>
+    }
+  </div>
+  <button type="submit">Login</button>
+</form>
