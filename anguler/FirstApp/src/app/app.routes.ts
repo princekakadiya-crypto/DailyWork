@@ -12,6 +12,6 @@ export const routes: Routes = [
     {path:'category',component:CategoryComponent},
     {path:'author',component:AuthorComponent},
     {path:'add-author',component:AddAuthorComponent},
-    {path:'edit-author',component:EditAuthorComponent},
+    {path:'edit-author/:id',component:EditAuthorComponent},
     {path:'review',component:ReviewComponent}
 ];
