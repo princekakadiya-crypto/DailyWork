@@ -17,6 +17,8 @@
     </tbody>
 </table> -->
 
+<a routerLink="/add-author" class="btn btn-primary">Add Author</a>
+
 @if(Authors$ | async; as Authors)
 {
 <table class="table table-striped table-bordered">
@@ -25,6 +27,7 @@
             <th>Author ID</th>
 			<th>Author Name</th>
             <th>Author Country</th>
+            <th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,6 +35,7 @@
             <td>{{ author.authorId }}</td>
             <td>{{ author.name }}</td>
             <td>{{ author.country }}</td>
+            <td><a routerLink="/edit-author" class="btn btn-sm btn-warning">Edit</a></td>
         </tr>
     </tbody>
 </table>

@@ -3,10 +3,12 @@ import { Author } from '../model/Author';
 import { FormsModule } from '@angular/forms';
 import { AuthorService } from '../service/author-service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-author-component',
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './add-author-component.html',
   styleUrl: './add-author-component.css',
 })
@@ -15,6 +17,7 @@ export class AddAuthorComponent {
 
 
   service=inject(AuthorService);
+  router=inject(Router);
 
   result$!: Observable<Author>;
 
@@ -22,6 +25,7 @@ export class AddAuthorComponent {
     console.log(this.Author);
     
     this.result$ = this.service.addAuthor(this.Author);
+  
 
     this.result$.subscribe({
       next: (author) => {
@@ -31,5 +35,8 @@ export class AddAuthorComponent {
         console.error('Error adding author:', error);
       }
     });
+
+    this.router.navigate(['/author']);
+
   }
 }
